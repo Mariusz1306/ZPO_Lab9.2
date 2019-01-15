@@ -9,5 +9,6 @@ public class Main {
         long timeElapsed = finish - start;
         System.out.println(prim.getSafeList()); //Wypisz wynik
         System.out.println("Czas obliczeń: " + timeElapsed + "ms");
+        prim.findFiveTwinPairs();
     }
 }
