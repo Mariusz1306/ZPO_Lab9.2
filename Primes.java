@@ -5,7 +5,8 @@ import java.util.concurrent.RecursiveAction;
 
 class Primes extends RecursiveAction {
     static final int SEQUENTIAL_THRESHOLD = 1000; //Każdy wątek będzie miał przedział w którym znajdzie się maksymalnie tyle liczb; Im mniejsza liczba, tym więcej wątków będzie
-
+    static final int NUMBER_OF_TWIN_PAIRS_TO_FIND = 5; //Ile mamy znaleźć par blizniaczych
+	
     int s; //początek przedziału
     int e; //koniec przedziału
     List<Integer> safeList; //nasz lista wynikowa
@@ -43,6 +44,17 @@ class Primes extends RecursiveAction {
             }
         }
         return true; //Jeśli nie zwróciliśmy do tej pory fałszu, to znaczy, że liczba nie dzieli się przez żadną inną liczbę, więc jest liczbą pierwszą
+    }
+	
+    public void findFiveTwinPairs(){
+        int numberOfPairsFound = 0;
+        for (int i = 0; i < getSafeList().size()-1; i++){ //Przejdź przez wszystkie znalezione liczby pierwsze (poza ostatnią)
+            if (getSafeList().get(i+1) - getSafeList().get(i) == 2) { //Jeśli obecną i następną liczbą wynosi dwa
+                System.out.println(getSafeList().get(i) + " : " + getSafeList().get(i + 1)); //Wypisz te dwie liczby
+                if (++numberOfPairsFound == 5) //Zwiększ zmienną, a następnie porównaj czy jest równa NUMBER_OF_TWIN_PAIRS_TO_FIND
+                    break; //Jak tak to wyjdź z pętli for
+            }
+        }
     }
 
     public List<Integer> getSafeList() {
